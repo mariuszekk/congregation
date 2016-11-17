@@ -1,29 +1,42 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head lang="en">
-
-    <title>Spring Framework Guru</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
-    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
-          rel="stylesheet" media="screen" />
-
-    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
-            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
-
-    
+<head>
+    <title>Angular, Spring Boot, Java 8 and others</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/content/bootstrap.css}" rel="stylesheet" />
+    <link th:href="@{/css/content/bootstrap-theme.css}" rel="stylesheet" />
+    <link th:href="@{/css/content/font-awesome.css}" rel="stylesheet" />
+    <link th:href="@{/css/content/themes/base/jquery-ui.css}" rel="stylesheet" />
+    <link th:href="@{/css/app.css}" rel="stylesheet" />
 </head>
-<body>
-<div class="container">
-    <div class="jumbotron">
-        <img src="../static/images/FBcover1200x628.png" width="1000"
-             th:src="@{images/FBcover1200x628.png}"/>
-        <h1>Hello</h1>
-
-        <h2>Fellow Spring Framework Gurus!!!</h2>
+<body ng-app="Congregation">
+    <div ng-view="">
     </div>
-</div>
 
+    <script th:src="@{/webjars/jquery/2.1.0/jquery.js}"></script>
+
+
+
+    <script th:src="@{/scripts/jquery-ui-1.10.4.js}"></script>
+    <script th:src="@{/scripts/underscore.js}"></script>
+    <script th:src="@{/scripts/angular.js}"></script>
+    <script th:src="@{/scripts/angular-resource.js}"></script>
+    <script th:src="@{/scripts/angular-route.js}"></script>
+    <script th:src="@{/scripts/ui-date.js}"></script>
+    <script th:src="@{/scripts/ui-bootstrap-0.10.0.js}"></script>
+
+    <script th:src="@{/app/app.js}"></script>
+    <script th:src="@{/app/common/common.js}"></script>
+    <script th:src="@{/app/angular/caching/cacheInterceptor.js}"></script>
+    <script th:src="@{/app/angular/data/data.js}"></script>
+    <script th:src="@{/app/angular/loader/loader.js}"></script>
+    <script th:src="@{/app/angular/loader/loader.directive.js}"></script>
+
+    <script type="text/javascript" th:inline="javascript">
+        var version = /*[[${version}]]*/ '0.0.0';
+        angular
+            .module('Congregation.Config', [])
+            .constant('CongregationVersion', version);
+    </script>
 </body>
 </html>

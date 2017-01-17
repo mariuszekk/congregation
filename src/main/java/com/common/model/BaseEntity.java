@@ -11,12 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
 
-/**
- * Created by mariuszn on 23/12/2016.
- */
 @Getter
 @MappedSuperclass
 @SequenceGenerator(name = "ID_SEQ", initialValue = 1, allocationSize = 100)
@@ -35,6 +33,7 @@ public abstract class BaseEntity implements Serializable {
   @Column(name = "TECH_UPDATE_TIME")
   private LocalDateTime updateTime;
 
+  @PrePersist
   private void createAndUpdateTime() {
     createTime = LocalDateTime.now();
     updateTime = LocalDateTime.now();

@@ -142,6 +142,12 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>info.ludwikowski.fluentbuilder</groupId>
+            <artifactId>fluentbuilder</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -156,9 +162,72 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.bsc.maven</groupId>
+                <artifactId>maven-processor-plugin</artifactId>
+                <version>2.0.5</version>
+                <executions>
+                    <execution>
+                        <id>generate-fluentbuilders</id>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <phase>generate-test-sources</phase>
+                        <configuration>
+                            <compilerArguments>
+                                <!-- additional generator params -->
+                                -Adebug=true -AuseIndefineArticles=true
+                            </compilerArguments>
+                            <processors>
+                                <processor>info.ludwikowski.fluentbuilder.processor.FluentBuilderProcessor</processor>
+                            </processors>
+                            <outputDirectory>src/test/generated</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <!--<execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/jpa-metadata</source>
+                            </sources>
+                        </configuration>
+                    </execution>-->
+                    <execution>
+                        <id>add-test-source</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/test/generated</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
-
 
 </project>

@@ -5,16 +5,16 @@ This module
 */
 angular.module('Congregation.Angular.Data', ['ngResource'])
     .controller('DatasController', ['$scope', '$resource', function ($scope, $resource) {
-        var clients = $resource("api/clients");
+        var territory = $resource("api/territory");
 
         $scope.reload = function () {
-            $scope.data = clients.query();
+            $scope.data = territory.query();
         };
 
         $scope.reload();
     }])
     .controller('DataController', ['$scope', '$resource', '$routeParams', '$location', function ($scope, $resource, $routeParams, $location) {
-        var clients = $resource("api/clients/:id", { id: '@id' });
+        var clients = $resource("api/territory/:id", { id: '@id' });
         var recommandations = $resource("api/recommandations");
 
         $scope.recommandations = recommandations.query();
@@ -27,6 +27,8 @@ angular.module('Congregation.Angular.Data', ['ngResource'])
                 });
             });
         });
+
+        $scope.data = clients;
 
         $scope.newData = {};
 

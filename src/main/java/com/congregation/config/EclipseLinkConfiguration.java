@@ -3,7 +3,6 @@ package com.congregation.config;
 import org.eclipse.persistence.config.BatchWriting;
 import org.eclipse.persistence.config.PersistenceUnitProperties;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.context.annotation.Configuration;
@@ -16,8 +15,8 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 @Configuration
-//@EnableJpaRepositories(basePackages = "com.congregation.repository")
-@EnableAutoConfiguration
+//@EnableJpaRepositories(basePackages = "com.congregation.repository", entityManagerFactoryRef="emf")
+//@EnableAutoConfiguration
 public class EclipseLinkConfiguration extends JpaBaseConfiguration {
  
    protected EclipseLinkConfiguration(DataSource dataSource, JpaProperties properties,
@@ -38,7 +37,7 @@ public class EclipseLinkConfiguration extends JpaBaseConfiguration {
       final Map<String, Object> ret = new HashMap<>();
       ret.put(PersistenceUnitProperties.BATCH_WRITING, BatchWriting.JDBC);
       ret.put("eclipselink.weaving", "false");
-//      ret.put("eclipselink.ddl-generation", "create-tables");
+      ret.put("eclipselink.ddl-generation", "create-tables");
       return ret;
    }
 }
